@@ -21,18 +21,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CourseServiceImplTest {
     @Mock
     CourseRepository repo;
-    @Spy
-    CourseMapper mapper = Mappers.getMapper(CourseMapper.class);
-    @InjectMocks CourseServiceImpl service;
+    
+    @Mock
+    CourseMapper mapper;
+
+    @InjectMocks 
+    CourseServiceImpl service;
 
     @Test
     void create_ShouldSetTimestamps() {
         var req = new CourseDTO.CourseCreateRequest("Kotlin", "DRAFT", true, 1L);
+        var course = new edu.unimagdalena.lms.entities.Course();
+        course.setTitle("Kotlin");
+        var response = new CourseDTO.CourseResponse(1L, "Kotlin", "DRAFT", true, null, null, null, null, null);
+        
+        when(mapper.toEntity(req)).thenReturn(course);
         when(repo.save(any())).thenAnswer(i -> i.getArgument(0));
+        when(mapper.toDTO(any())).thenReturn(response);
 
         var res = service.create(req);
 
+        assertThat(res).isNotNull();
         assertThat(res.title()).isEqualTo("Kotlin");
-        verify(repo).save(argThat(course -> course.getCreatedAt() != null));
+        verify(repo).save(argThat(c -> c.getCreatedAt() != null));
     }
 }
