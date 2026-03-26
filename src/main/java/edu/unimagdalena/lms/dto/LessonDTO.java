@@ -20,8 +20,8 @@ public class LessonDTO {
     public record LessonResponse(
             Long id,
             String title,
-            int orderIndex
-          //  CourseDTO.CourseBasicResponse course
+            int orderIndex,
+            CourseDTO.CourseBasicResponse course
     ) implements Serializable {}
 
 
