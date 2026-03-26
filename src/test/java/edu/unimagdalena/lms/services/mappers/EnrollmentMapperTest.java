@@ -21,3 +21,4 @@ class EnrollmentMapperTest {
         assertThat(entity.getStatus()).isEqualTo("ENROLLED");
     }
 }
+

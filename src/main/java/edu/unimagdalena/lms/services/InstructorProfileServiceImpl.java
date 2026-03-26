@@ -49,7 +49,7 @@ public class InstructorProfileServiceImpl implements InstructorProfileService {
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Profile not found");
+            throw new EntityNotFoundException("InstructorProfile not found ");
         }
         repository.deleteById(id);
     }
