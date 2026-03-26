@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring", uses = {StudentMapper.class, CourseMapper.class})
+@Mapper(componentModel = "spring", uses = {StudentMapper.class})
 public interface EnrollmentMapper {
 
     @Mapping(target = "id", ignore = true)
